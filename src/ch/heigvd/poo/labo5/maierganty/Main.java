@@ -1,3 +1,9 @@
+/*
+ * --------------------HEADER--------------
+ * C'est un super header
+ * -----------------------------------------------
+ */
+
 package ch.heigvd.poo.labo5.maierganty;
 
 public class Main {
