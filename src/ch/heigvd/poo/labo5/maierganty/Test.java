@@ -11,14 +11,14 @@ public class Test {
 
         // petit test temporaire juste pour m'assurer que j'avais fait juste on pourra le virer
         int[][] values1 = {{1,2},{1,2}};
-        Matrix matrix = new Matrix(2, 2,2, values1);
-        System.out.println(matrix);
+        Old_Matrix oldMatrix = new Old_Matrix(2, 2,2, values1);
+        System.out.println(oldMatrix);
 
         int[][] values2 = {{1,2,3},{1,2,5}};
-        Matrix matrix2 = new Matrix(2, 3,2, values2);
-        System.out.println(matrix2);
+        Old_Matrix oldMatrix2 = new Old_Matrix(2, 3,2, values2);
+        System.out.println(oldMatrix2);
 
-        matrix.addition(matrix2);
-        System.out.println(matrix);
+        oldMatrix.addition(oldMatrix2);
+        System.out.println(oldMatrix);
     }
 }
