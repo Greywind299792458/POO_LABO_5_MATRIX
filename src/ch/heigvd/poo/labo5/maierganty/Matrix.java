@@ -31,44 +31,17 @@ public class Matrix {
 
     // Elliot
     public void addition(Matrix other) {
-        // version non factorisée à virer
-        if(this.modulus != other.modulus) {
-            throw new RuntimeException("les modulos ne correspondent pas"); //  à mettre peut-être dans checkMatrix
-        }
-        this.checkSize(other);
-        for(int currentLine = 0; currentLine < this.lineCount; ++currentLine) {
-            for(int currentCol = 0; currentCol < this.colCount; ++currentCol) {
-                this.elements[currentLine][currentCol] += other.elements[currentLine][currentCol];
-
-                this.elements[currentLine][currentCol] = this.elements[currentLine][currentCol] % this.modulus;
-            }
-        }
-        // futur exemple d'appel centralisé à voir ensemble
-        // this.addSub(other, true);
+        this.addSub(other, true);
     }
 
     // Elliot
     public void substraction(Matrix other) {
-        // version non factorisée à virer
-        if(this.modulus != other.modulus) {
-            throw new RuntimeException("les modulos ne correspondent pas"); // a mettre peut-être dans checkMatrix
-        }
-        this.checkSize(other);
-        for(int currentLine = 0; currentLine < this.lineCount; ++currentLine) {
-            for(int currentCol = 0; currentCol < this.colCount; ++currentCol) {
-                this.elements[currentLine][currentCol] -= other.elements[currentLine][currentCol];
-                this.elements[currentLine][currentCol] = this.elements[currentLine][currentCol] % this.modulus;
-            }
-        }
-        // futur exemple d'appel centralisé à voir ensemble
-        // this.addSub(other, false);
+
+        this.addSub(other, false);
     }
 
     private void addSub(Matrix other, boolean addition) {
 
-        if(this.modulus != other.modulus) {
-            throw new RuntimeException("les modulos ne correspondent pas");
-        }
         this.checkSize(other);
         for(int currentLine = 0; currentLine < this.lineCount; ++currentLine) {
             for(int currentCol = 0; currentCol < this.colCount; ++currentCol) {
