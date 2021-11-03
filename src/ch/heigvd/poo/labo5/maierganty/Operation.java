@@ -1,9 +1,3 @@
-/*
- * --------------------HEADER--------------
- * C'est un super header :o
- * -----------------------------------------------
- */
-
 package ch.heigvd.poo.labo5.maierganty;
 
 public interface Operation {    // BOOM une interface :D
