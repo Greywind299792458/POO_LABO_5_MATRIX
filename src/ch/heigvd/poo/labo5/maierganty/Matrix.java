@@ -2,16 +2,20 @@ package ch.heigvd.poo.labo5.maierganty;
 
 import java.util.Random;
 
-
 public class Matrix {
 
     private final int[][] elements;
     private final int modulus;
     private final int rowCount;
     private final int colCount;
-    private final Random random = new Random();
+    static private final Random random = new Random();
 
-
+    /**
+     *
+     * @param modulus
+     * @param elements
+     * @throws RuntimeException parce que
+     */
     public Matrix(int modulus, int[][] elements) {
         if (modulus < 2)
             throw new RuntimeException("modulus is smaller than 2");
@@ -43,27 +47,47 @@ public class Matrix {
         this.elements = deepClone2dIntArray(elements);
     }
 
+    /**
+     *
+     * @param modulus
+     * @param colCount
+     * @param rowCount
+     */
     public Matrix(int modulus, int colCount, int rowCount) {
-        if (modulus < 2) {
-            throw new RuntimeException("modulus is smaller than 2");
-        }
+        this(modulus, generateRandomElements(modulus, colCount, rowCount));
+    }
+
+    /**
+     *
+     * @param modulus
+     * @param colCount
+     * @param rowCount
+     * @return
+     * @throws RuntimeException parce que
+     */
+    static private int[][] generateRandomElements(int modulus, int colCount, int rowCount) {
         if (colCount <= 0) {
             throw new RuntimeException("colCount is smaller or equal to 0");
         }
         if (rowCount <= 0) {
             throw new RuntimeException("lineCount is smaller or equal to 0");
         }
-        elements = new int[rowCount][colCount];
+        int[][] elements = new int[rowCount][colCount];
         for (int[] row : elements) {
             for (int colIndex = 0; colIndex < row.length; colIndex++) {
                 row[colIndex] = random.nextInt(modulus);
             }
         }
-        this.modulus = modulus;
-        this.colCount = colCount;
-        this.rowCount = rowCount;
+        return elements;
     }
 
+    /**
+     *
+     * @param other
+     * @param operation
+     * @return Matrix
+     * @throws RuntimeException parce que
+     */
     public Matrix executeOperation(Matrix other, Operation operation) {
         if (other == null) {
             throw new RuntimeException("other is null");
@@ -85,10 +109,18 @@ public class Matrix {
         return new Matrix(modulus, resultElements);
     }
 
+    /**
+     *
+     * @return
+     */
     public int[][] getElements() {
         return deepClone2dIntArray(elements);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -101,6 +133,11 @@ public class Matrix {
         return result.toString();
     }
 
+    /**
+     *
+     * @param originalArray
+     * @return
+     */
     private static int[][] deepClone2dIntArray(int[][] originalArray) {
         if (originalArray == null) {
             throw new NullPointerException("originalArray is null");
@@ -112,6 +149,12 @@ public class Matrix {
         return copy_array;
     }
 
+    /**
+     *
+     * @param rowIndex
+     * @param colIndex
+     * @return
+     */
     private int getElementOrZero(int rowIndex, int colIndex) {
         if (rowIndex < 0) {
             throw new RuntimeException("rowIndex < 0");
