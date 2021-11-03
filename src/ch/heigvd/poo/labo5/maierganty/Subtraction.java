@@ -1,7 +1,7 @@
 /*
  * FILE-HEADER----------------
  * Laboratoire : POO - labo5: Matrix Reloaded
- * Fichier : Substraction.java
+ * Fichier : Subtraction.java
  * Auteurs : Elliot Ganty et Damien Maier
  * Date : 03.11.2021
  * But : Le but est décrit dans les commentaires ci-dessous décrivant la classe de ce fichier.
@@ -11,9 +11,9 @@
 package ch.heigvd.poo.labo5.maierganty;
 
 /**
- * Class that represents the substraction operation between two integers.
+ * Class that represents the subtraction operation between two integers.
  */
-public class Substraction implements Operation {
+public class Subtraction implements Operation {
 
     /**
      * @param value1 first integer

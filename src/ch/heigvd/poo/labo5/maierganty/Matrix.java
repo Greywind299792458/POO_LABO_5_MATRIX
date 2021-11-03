@@ -26,13 +26,13 @@ public class Matrix {
     static private final Random random = new Random();
 
     /**
-     * Constructor with values and modulus given in parameters.
+     * Constructs a matrix with specified values.
      *
      * @param modulus  ( > 0)
      * @param elements matrix component's values
-     *                 (nbr of columns / rows must be positive, all lines must have the same size,
-     *                 Matrix's values must be positive and smaller than the modulus
-     * @throws RuntimeException if the given parameters are invalid according to the specifications above
+     *                 (nbr of columns and rows must be > 0, all lines must have the same size,
+     *                 values must be positive and smaller than the modulus)
+     * @throws RuntimeException if the parameters are invalid according to the specifications above
      * @author Elliot Ganty et Damien Maier
      */
     public Matrix(int modulus, int[][] elements) {
@@ -67,8 +67,7 @@ public class Matrix {
     }
 
     /**
-     * Constructor that generates random values for the matrix according to the number of rows and columns
-     * as well as the modulus given as parameters.
+     * Constructs a matrix with random values
      *
      * @param modulus  ( > 0)
      * @param colCount number of columns ( > 0)
@@ -80,7 +79,7 @@ public class Matrix {
     }
 
     /**
-     * Generate an array of arrays of int filled with random values based on the given modulus.
+     * Generates a 2D array of int filled with random values based on the given modulus.
      *
      * @param modulus  ( > 0)
      * @param colCount number of columns ( > 0)
@@ -112,7 +111,7 @@ public class Matrix {
      * @param other     second Matrix ( cannot be null)
      * @param operation selected operation to apply ( cannot be null)
      * @return result of operation
-     * @throws RuntimeException if the other matrix or the operation is null and also if moduli are different
+     * @throws RuntimeException if the other matrix or the operation is null or if moduli are different
      * @author Elliot Ganty et Damien Maier
      */
     public Matrix executeOperation(Matrix other, Operation operation) {
@@ -147,7 +146,7 @@ public class Matrix {
     }
 
     /**
-     * Overrides the toString() method of the Object class.
+     * Prints the content of the matrix.
      *
      * @return the String representation of the matrix
      * @author Elliot Ganty et Damien Maier

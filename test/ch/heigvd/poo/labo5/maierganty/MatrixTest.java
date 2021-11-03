@@ -161,4 +161,18 @@ class MatrixTest {
                 new int[][]{{1, 9, 4}, {4, 3, 2}},
                 (matrix1.executeOperation(matrix2, new Addition()).getElements())));
     }
+
+    @org.junit.jupiter.api.Test
+    void subtractionOperationShouldWork() {
+        assertTrue(Arrays.deepEquals(
+                new int[][]{{5, 9, 4}, {6, 3, 2}},
+                (matrix1.executeOperation(matrix2, new Subtraction()).getElements())));
+    }
+
+    @org.junit.jupiter.api.Test
+    void productOperationShouldWork() {
+        assertTrue(Arrays.deepEquals(
+                new int[][]{{4, 0, 0}, {0, 0, 0}},
+                (matrix1.executeOperation(matrix2, new Product()).getElements())));
+    }
 }
