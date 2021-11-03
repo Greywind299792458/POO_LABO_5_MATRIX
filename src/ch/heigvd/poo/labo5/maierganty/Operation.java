@@ -1,10 +1,25 @@
+/*
+ * FILE-HEADER----------------
+ * Laboratoire : POO - labo5: Matrix Reloaded
+ * Fichier : Operation.java
+ * Auteurs : Elliot Ganty et Damien Maier
+ * Date : 03.11.2021
+ * But : Le but est décrit dans les commentaires ci-dessous décrivant la classe de ce fichier.
+ * Compilateur : OpenJDK 11
+ * ---------------------------
+ */
 package ch.heigvd.poo.labo5.maierganty;
 
-public interface Operation {    // BOOM une interface :D
-    int execute(int value1, int value2);   // créer des classes qui héritent et implémenter la fonction
+/**
+ * Interface declaring a method that executes operations between 2 integers
+ */
+public interface Operation {
 
-    String toString(Operation operation); // à discuter de l'utilité de cell-là
-
-    // ça a mis que les "public" étaient redondants  et ça voulait pas commit avec ????
-    // stack overflow : All methods in an interface are implicitly public and abstract (but not final).
+    /**
+     * @param value1 first integer
+     * @param value2 second integer
+     * @return result of the operation
+     * @author Elliot Ganty et Damien Maier
+     */
+    int execute(int value1, int value2);
 }

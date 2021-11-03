@@ -1,7 +1,22 @@
+/*
+ * FILE-HEADER----------------
+ * Laboratoire : POO - labo5: Matrix Reloaded
+ * Fichier : Matrix.java
+ * Auteurs : Elliot Ganty et Damien Maier
+ * Date : 03.11.2021
+ * But : Le but est décrit dans les commentaires ci-dessous décrivant la classe de ce fichier.
+ * Compilateur : OpenJDK 11
+ * ---------------------------
+ */
 package ch.heigvd.poo.labo5.maierganty;
 
 import java.util.Random;
 
+/**
+ * Class that represents Matrix's of NxM size (N,M > 0) filled with either random values or given values.
+ * In both cases a Matrix has a modulus and all elements are between 0 and the modulus(not included).
+ * Matrices are immutables.
+ */
 public class Matrix {
 
     private final int[][] elements;
@@ -11,13 +26,17 @@ public class Matrix {
     static private final Random random = new Random();
 
     /**
+     * Constructor with values and modulus given in parameters.
      *
-     * @param modulus
-     * @param elements
-     * @throws RuntimeException parce que
+     * @param modulus  ( > 0)
+     * @param elements matrix component's values
+     *                 (nbr of columns / rows must be positive, all lines must have the same size,
+     *                 Matrix's values must be positive and smaller than the modulus
+     * @throws RuntimeException if the given parameters are invalid according to the specifications above
+     * @author Elliot Ganty et Damien Maier
      */
     public Matrix(int modulus, int[][] elements) {
-        if (modulus < 2)
+        if (modulus < 1)
             throw new RuntimeException("modulus is smaller than 2");
         if (elements == null)
             throw new RuntimeException("elements is null");
@@ -48,22 +67,27 @@ public class Matrix {
     }
 
     /**
+     * Constructor that generates random values for the matrix according to the number of rows and columns
+     * as well as the modulus given as parameters.
      *
-     * @param modulus
-     * @param colCount
-     * @param rowCount
+     * @param modulus  ( > 0)
+     * @param colCount number of columns ( > 0)
+     * @param rowCount number of lines ( > 0)
+     * @author Elliot Ganty et Damien Maier
      */
     public Matrix(int modulus, int colCount, int rowCount) {
         this(modulus, generateRandomElements(modulus, colCount, rowCount));
     }
 
     /**
+     * Generate an array of arrays of int filled with random values based on the given modulus.
      *
-     * @param modulus
-     * @param colCount
-     * @param rowCount
-     * @return
-     * @throws RuntimeException parce que
+     * @param modulus  ( > 0)
+     * @param colCount number of columns ( > 0)
+     * @param rowCount number of rows ( > 0)
+     * @return the 2D array of int with random elements
+     * @throws RuntimeException if the given parameters are invalid according to the specifications above
+     * @author Elliot Ganty et Damien Maier
      */
     static private int[][] generateRandomElements(int modulus, int colCount, int rowCount) {
         if (colCount <= 0) {
@@ -82,11 +106,14 @@ public class Matrix {
     }
 
     /**
+     * Returns a new Matrix which is the result of a given operation between the current and a given matrix
+     * (operation is done component by component).
      *
-     * @param other
-     * @param operation
-     * @return Matrix
-     * @throws RuntimeException parce que
+     * @param other     second Matrix ( cannot be null)
+     * @param operation selected operation to apply ( cannot be null)
+     * @return result of operation
+     * @throws RuntimeException if the other matrix or the operation is null and also if moduli are different
+     * @author Elliot Ganty et Damien Maier
      */
     public Matrix executeOperation(Matrix other, Operation operation) {
         if (other == null) {
@@ -96,7 +123,7 @@ public class Matrix {
             throw new RuntimeException("operation is null");
         }
         if (modulus != other.modulus) {
-            throw new RuntimeException("the matrices have different modulus");
+            throw new RuntimeException("the matrices have different moduli");
         }
         int[][] resultElements = new int[Math.max(rowCount, other.rowCount)][Math.max(colCount, other.colCount)];
         for (int rowIndex = 0; rowIndex < resultElements.length; rowIndex++)
@@ -104,22 +131,26 @@ public class Matrix {
                 int operationResult = operation.execute(
                         getElementOrZero(rowIndex, colIndex),
                         other.getElementOrZero(rowIndex, colIndex));
-                resultElements[rowIndex][colIndex] = operationResult % modulus;
+                resultElements[rowIndex][colIndex] = Math.floorMod(operationResult, modulus);
             }
         return new Matrix(modulus, resultElements);
     }
 
     /**
+     * Returns a copy of the elements of the matrix.
      *
-     * @return
+     * @return the deep copy
+     * @author Elliot Ganty et Damien Maier
      */
     public int[][] getElements() {
         return deepClone2dIntArray(elements);
     }
 
     /**
+     * Overrides the toString() method of the Object class.
      *
-     * @return
+     * @return the String representation of the matrix
+     * @author Elliot Ganty et Damien Maier
      */
     @Override
     public String toString() {
@@ -134,9 +165,12 @@ public class Matrix {
     }
 
     /**
+     * Returns a deep copy of a given 2D array of int.
      *
-     * @param originalArray
-     * @return
+     * @param originalArray array to copy ( cannot be null)
+     * @return the deep copy
+     * @throws NullPointerException if the originalArray is null
+     * @author Elliot Ganty et Damien Maier
      */
     private static int[][] deepClone2dIntArray(int[][] originalArray) {
         if (originalArray == null) {
@@ -150,10 +184,14 @@ public class Matrix {
     }
 
     /**
+     * Returns either the value of the requested element in the Matrix or 0 if the indexes are out of
+     * the Matrix's boundaries
      *
-     * @param rowIndex
-     * @param colIndex
-     * @return
+     * @param rowIndex row index
+     * @param colIndex column index
+     * @return value that will be fetched from the Matrix or 0
+     * @throws RuntimeException if any index is negative
+     * @author Elliot Ganty et Damien Maier
      */
     private int getElementOrZero(int rowIndex, int colIndex) {
         if (rowIndex < 0) {

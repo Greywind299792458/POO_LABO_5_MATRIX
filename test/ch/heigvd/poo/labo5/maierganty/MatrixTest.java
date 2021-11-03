@@ -1,9 +1,22 @@
+/*
+ * FILE-HEADER----------------
+ * Laboratoire : POO - labo5: Matrix Reloaded
+ * Fichier : MatrixTest.java
+ * Auteurs : Elliot Ganty et Damien Maier
+ * Date : 03.11.2021
+ * But : Le but est décrit dans les commentaires ci-dessous décrivant la classe de ce fichier.
+ * Compilateur : OpenJDK 11
+ * ---------------------------
+ */
 package ch.heigvd.poo.labo5.maierganty;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class that implements unit tests for the Matrix class using and testing the Operation class as well
+ */
 class MatrixTest {
     private final int[][] elements = {{8, 9, 4}, {0, 3, 2}};
     private final Matrix matrix1 = new Matrix(10, elements);
@@ -21,9 +34,9 @@ class MatrixTest {
     @org.junit.jupiter.api.Test
     void constructorWithElementsShouldThrowRuntimeExceptionIfAnArgumentIsInvalid() {
         assertThrows(RuntimeException.class, () -> {
-                    new Matrix(1, new int[][]{{0}});
+                    new Matrix(0, new int[][]{{0}});
                 },
-                "must throw exception if modulus < 2");
+                "must throw exception if modulus < 1");
 
         assertThrows(RuntimeException.class, () -> {
                     new Matrix(10, null);
@@ -73,9 +86,9 @@ class MatrixTest {
     @org.junit.jupiter.api.Test
     void randomConstructorShouldThrowRuntimeExceptionIfAnArgumentIsInvalid() {
         assertThrows(RuntimeException.class, () -> {
-                    new Matrix(1, 10, 20);
+                    new Matrix(0, 10, 20);
                 },
-                "must throw exception if modulus < 2");
+                "must throw exception if modulus < 1");
 
         assertThrows(RuntimeException.class, () -> {
                     new Matrix(10, 0, 20);
