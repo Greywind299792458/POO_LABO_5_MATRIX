@@ -1,7 +1,7 @@
 package ch.heigvd.poo.labo5.maierganty;
 
 public interface Operation {    // BOOM une interface :D
-    int execute(int a, int b);   // créer des classes qui héritent et implémenter la fonction
+    int execute(int value1, int value2);   // créer des classes qui héritent et implémenter la fonction
 
     String toString(Operation operation); // à discuter de l'utilité de cell-là
 
