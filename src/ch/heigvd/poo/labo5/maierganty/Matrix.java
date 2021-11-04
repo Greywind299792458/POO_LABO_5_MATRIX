@@ -23,7 +23,10 @@ public class Matrix {
     private final int modulus;
     private final int rowCount;
     private final int colCount;
-    static private final Random random = new Random();
+    /**
+     * random values generator that is used by the generateRandomElements method
+     */
+    private static final Random random = new Random();
 
     /**
      * Constructs a matrix with specified values.
@@ -67,41 +70,17 @@ public class Matrix {
     }
 
     /**
-     * Constructs a matrix with random values
+     * Constructs a matrix with random values.
      *
      * @param modulus  ( > 0)
      * @param colCount number of columns ( > 0)
      * @param rowCount number of lines ( > 0)
+     * @throws RuntimeException if the parameters are invalid according to the specifications above
      * @author Elliot Ganty et Damien Maier
      */
     public Matrix(int modulus, int colCount, int rowCount) {
+        // arguments validity is checked by generateRandomElements and by the other constructor
         this(modulus, generateRandomElements(modulus, colCount, rowCount));
-    }
-
-    /**
-     * Generates a 2D array of int filled with random values based on the given modulus.
-     *
-     * @param modulus  ( > 0)
-     * @param colCount number of columns ( > 0)
-     * @param rowCount number of rows ( > 0)
-     * @return the 2D array of int with random elements
-     * @throws RuntimeException if the given parameters are invalid according to the specifications above
-     * @author Elliot Ganty et Damien Maier
-     */
-    static private int[][] generateRandomElements(int modulus, int colCount, int rowCount) {
-        if (colCount <= 0) {
-            throw new RuntimeException("colCount is smaller or equal to 0");
-        }
-        if (rowCount <= 0) {
-            throw new RuntimeException("lineCount is smaller or equal to 0");
-        }
-        int[][] elements = new int[rowCount][colCount];
-        for (int[] row : elements) {
-            for (int colIndex = 0; colIndex < row.length; colIndex++) {
-                row[colIndex] = random.nextInt(modulus);
-            }
-        }
-        return elements;
     }
 
     /**
@@ -164,7 +143,33 @@ public class Matrix {
     }
 
     /**
-     * Returns a deep copy of a given 2D array of int.
+     * Generates a 2D array of int filled with random values based on the given modulus.
+     *
+     * @param modulus  ( > 0)
+     * @param colCount number of columns ( > 0)
+     * @param rowCount number of rows ( > 0)
+     * @return the 2D array of int with random elements
+     * @throws RuntimeException if the given parameters are invalid according to the specifications above
+     * @author Elliot Ganty et Damien Maier
+     */
+    private static int[][] generateRandomElements(int modulus, int colCount, int rowCount) {
+        if (colCount <= 0) {
+            throw new RuntimeException("colCount is smaller or equal to 0");
+        }
+        if (rowCount <= 0) {
+            throw new RuntimeException("lineCount is smaller or equal to 0");
+        }
+        int[][] elements = new int[rowCount][colCount];
+        for (int[] row : elements) {
+            for (int colIndex = 0; colIndex < row.length; colIndex++) {
+                row[colIndex] = random.nextInt(modulus);
+            }
+        }
+        return elements;
+    }
+
+    /**
+     * Returns a deep copy of a 2D array of int.
      *
      * @param originalArray array to copy ( cannot be null)
      * @return the deep copy
@@ -183,8 +188,7 @@ public class Matrix {
     }
 
     /**
-     * Returns either the value of the requested element in the Matrix or 0 if the indexes are out of
-     * the Matrix's boundaries
+     * Returns the required matrix element. If the requested position is out of matrix bounds, returns 0.
      *
      * @param rowIndex row index
      * @param colIndex column index
