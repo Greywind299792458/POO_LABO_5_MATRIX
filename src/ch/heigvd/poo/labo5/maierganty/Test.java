@@ -56,6 +56,7 @@ public class Test {
      *
      * @param args program arguments as explained for the main method
      * @return false if arguments are invalid, true otherwise
+     * @author Elliot Ganty et Damien Maier
      */
     private static boolean readProgramArguments(String[] args) {
         if (args.length != 5) {

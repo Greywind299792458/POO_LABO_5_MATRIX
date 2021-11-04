@@ -51,7 +51,7 @@ class MatrixTest {
         assertThrows(RuntimeException.class, () -> {
                     new Matrix(10, new int[0][]);
                 },
-                "must throw exception if elements has 0 row");
+                "must throw exception if elements has 0 rows");
 
         assertThrows(RuntimeException.class, () -> {
                     new Matrix(10, new int[][]{new int[0]});

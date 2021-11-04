@@ -159,6 +159,9 @@ public class Matrix {
         if (rowCount <= 0) {
             throw new RuntimeException("lineCount is smaller or equal to 0");
         }
+        if (modulus <= 0) {
+            throw new RuntimeException("modulus is smaller or equal to 0");
+        }
         int[][] elements = new int[rowCount][colCount];
         for (int[] row : elements) {
             for (int colIndex = 0; colIndex < row.length; colIndex++) {
